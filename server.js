@@ -8,17 +8,13 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // Routes
 app.get('/', (req, res) => {
-    res.render('signup');
+    res.render('voter-registration');
 });
 
-app.post('/signup', (req, res) => {
+app.post('/login', (req, res) => {
     const { username, password } = req.body;
     users.push({ username, password });
     res.redirect('/login');
-});
-
-app.get('/login', (req, res) => {
-    res.render('login');
 });
 
 app.post('/login', (req, res) => {
