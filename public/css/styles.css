@@ -14,9 +14,20 @@ body {
     background-image: linear-gradient(180deg, #fecc4c, #ffac33);
     border: 2px solid #feac32;
     color: #fff;
-    font-weight: bolder  
+    font-weight: bolder;
+    cursor: pointer;
 }
 
 .p-text {
+    margin: 0 auto;
+}
+
+.reg-btn {
+    background-color: #feac32;
+    background-image: linear-gradient(180deg, #fecc4c, #ffac33);
+    border: 2px solid #feac32;
+    color: #fff;
+    font-weight: bolder;
+    cursor: pointer;
     margin: 0 auto;
 }

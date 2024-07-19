@@ -36,6 +36,10 @@ db.serialize(() => {
 
 // Routes
 app.get('/', (req, res) => {
+  res.render('index');
+});
+
+app.get('/reg-to-vote', (req, res) => {
   res.render('voter-registration');
 });
 
