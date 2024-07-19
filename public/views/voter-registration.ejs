@@ -3,24 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign Up Form</title>
+    <title>Election App | Voter Registration</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-7">
+            <div class="col-md-10 col-sm-10">
                 <h1 class="text-center text-white text-bolder mt-3">Voter Registration Form</h1>
-                <form action="/signup" method="post" class="su-form mt-5">
+                <form action="/voter-registration" method="post" class="su-form mt-2">
                     <div class="form-group row">
                         <label class="control-label col-md-2 ml-5" for="username">Username:</label>
                         <input type="text" class="form-control col-md-7" id="username" placeholder="Enter username">
-                    </div>
-            
-                    <div class="form-group row">
-                        <label class="control-label col-md-2 ml-5" for="email">Email:</label>
-                        <input type="email" class="form-control col-md-7" id="email" placeholder="Enter email">
                     </div>
             
                     <div class="form-group row">
@@ -31,6 +26,38 @@
                     <div class="form-group row">
                         <label class="control-label col-md-2 ml-5" for="confirmPassword">Confirm Password:</label>
                         <input type="password" class="form-control col-md-7" id="confirmPassword" placeholder="Confirm password">
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="control-label col-md-2 col-sm-2 ml-5" for="firstname">First Name:</label>
+                        <input type="text" class="form-control col-md-7 col-sm-7" id="firstname" placeholder="Enter First Name" required>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="control-label col-md-2 col-sm-2 ml-5" for="middlename">Middle Name</label>
+                        <input type="text" class="form-control col-md-7 col-sm-7" id="middlename" placeholder="Enter Middle Name">
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="control-label col-md-2 col-sm-2 ml-5" for="lastname">Last Name:</label>
+                        <input type="text" class="form-control col-md-7 col-sm-7" id="lastname" placeholder="Enter Last Name" required>
+                    </div>
+            
+                    <div class="form-group row">
+                        <label class="control-label col-md-2 col-sm-2 ml-5" for="dob">Date of Birth:</label>
+                        <input type="date" class="form-control col-md-7 col-sm-7" id="dob" placeholder="Enter Date of Birth" required>
+                    </div>
+            
+                    <div class="form-group row">
+                        <label class="control-label col-md-2 col-sm-2 ml-5" for="pp">Photo:</label>
+                        <input type="file" accept="image/*" class="form-control col-md-7 col-sm-7" id="pp" required> <br>
+                        <small class="text-muted p-text">Please upload a passport size photo (JPEG or PNG) for better identification.</small>
+                    </div>
+            
+                    <div class="form-group d-flex align-items-center">
+                        <input type="checkbox" class="small-checkbox mr-2" id="confirmation" required>
+                        <label class="mb-0" for="confirmation"><small class="text-muted">I hereby declare that the information provided is accurate and complete 
+                            to the best of my knowledge. I understand that my information will be used for the purpose of election administration and voting.</small></label>
                     </div>
                 <div class="col text-center">
                     <button type="submit" class="btn submit-btn">Sign Up</button>
