@@ -75,6 +75,10 @@ app.get('/reg-to-vote', (req, res) => {
   res.render('voter-registration');
 });
 
+app.get('/reg-party', (req, res) => {
+  res.render('party-registration');
+});
+
 app.post('/voter-registration', upload.single('photo'), (req, res) => {
   const { username, password, confirmPassword, firstname, middlename, lastname, dob } = req.body;
   const photo = req.file ? req.file.buffer : null;
