@@ -27,8 +27,7 @@ db.serialize(() => {
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     user_name TEXT NOT NULL,
     password TEXT NOT NULL,
-    user_id INTEGER,
-    FOREIGN KEY (user_id) REFERENCES user(id)
+    user_id INTEGER REFERENCES user(id)
   )`);
 
   db.run(`CREATE TABLE IF NOT EXISTS user (
@@ -38,8 +37,7 @@ db.serialize(() => {
     last_name TEXT NOT NULL,
     dob DATE NOT NULL,
     photo BLOB NOT NULL,
-    auth_id INTEGER,
-    FOREIGN KEY (auth_id) REFERENCES auth(id)
+    auth_id INTEGER REFERENCES auth(id)
   )`);
 
   db.run(`CREATE TABLE IF NOT EXISTS parties (
@@ -64,6 +62,11 @@ db.serialize(() => {
     FOREIGN KEY (position_id) REFERENCES positions(id),
     FOREIGN KEY (party_id) REFERENCES parties(id)
   )`);
+
+  db.run(`CREATE TABLE IF NOT EXISTS roles (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    role TEXT NOT NULL
+  )`);
 });
 
 // Routes
@@ -72,7 +75,15 @@ app.get('/', (req, res) => {
 });
 
 app.get('/reg-to-vote', (req, res) => {
-  res.render('voter-registration');
+  db.all('SELECT * FROM roles', function (err, rows) {
+    if (err) {
+      return res.status(500).send('Error fetching roles from the database.');
+    }
+    else {
+      console.log({roles : rows});
+      res.render('voter-registration', { roles: rows });
+    }
+  });
 });
 
 app.get('/reg-party', (req, res) => {
@@ -92,10 +103,9 @@ app.post('/voter-registration', upload.single('photo'), (req, res) => {
     if (err) {
       return res.status(500).send('Error inserting data into the auth table.');
     }
-    const authId = this.lastID;
 
     // Insert into the user table
-    db.run('INSERT INTO user (first_name, middle_name, last_name, dob, photo, auth_id) VALUES (?, ?, ?, ?, ?, ?)', [firstname, middlename, lastname, dob, photo, authId], function(err) {
+    db.run('INSERT INTO user (first_name, middle_name, last_name, dob, photo, auth_id) VALUES (?, ?, ?, ?, ?, ?)', [firstname, middlename, lastname, dob, photo], function(err) {
       if (err) {
         return res.status(500).send('Error inserting data into the user table.');
       }
@@ -106,6 +116,17 @@ app.post('/voter-registration', upload.single('photo'), (req, res) => {
 
 app.get('/register-party', (req, res) => {
   res.render('party-registration');
+});
+
+app.post('/party-registration', upload.single('logo'), (req, res) => {
+  const party = req.body;
+  const logo = req.file ? req.file.buffer : null;
+  db.run('INSERT INTO parties (party, logo) VALUES (?, ?)', [party, logo], function(err){
+    if (err) {
+      return res.status(500).send('Error inserting data into the party table.');
+    }
+    res.send('Party registration successful!');
+  });
 });
 
 app.get('/login', (req, res) => {

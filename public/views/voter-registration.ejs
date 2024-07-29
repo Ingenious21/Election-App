@@ -53,6 +53,15 @@
                         <input type="file" accept="image/*" class="form-control col-md-7 col-sm-7" id="pp" name="photo" required> <br>
                         <small class="text-muted p-text">Please upload a passport size photo (JPEG or PNG) for better identification.</small>
                     </div>
+
+                    <div class="form-group row">
+                        <label class="control-label col-md-2 col-sm-2 ml-5" for="roles">Role:</label>
+                        <select class="form-control col-md-7 col-sm-7" id="roles" name="roles" required>
+                            <% roles.map(role => { %>
+                                <option value="<%= role.role %>"><%= role.role %></option>
+                            <% }) %>
+                        </select>
+                    </div>
             
                     <div class="form-group d-flex align-items-center">
                         <input type="checkbox" class="small-checkbox mr-2" id="confirmation" name="confirmation" required>
